@@ -6,7 +6,7 @@ var ecoregions = ee.FeatureCollection('ft:1GzN7apqS42eIZNUoS4uZoXyspckUuPh4dzLe0
 var filterBiome = ecoregions.filterMetadata('BIOME', 'equals', 12);
 var filterRealm = filterBiome.filterMetadata('REALM', 'equals', 'PA');
 // get the forest product
-var gfcImage = ee.Image('UMD/hansen/global_forest_change_2015').clip(filtercountry); 
+var gfcImage = ee.Image('UMD/hansen/global_forest_change_2015').clip(filterRealm); 
 var treecover2000 = gfcImage.select('treecover2000');
 // set the treshold of the pixel value at 30 and multiply by the area of each pixel, this means that you consider only the pixels that are covered for more than 30% by trees
 var treecover2000Area = treecover2000.gt(30).multiply(ee.Image.pixelArea());
