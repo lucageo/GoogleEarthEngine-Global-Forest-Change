@@ -9,7 +9,7 @@ print (filtercountry);
 var gfcImage = ee.Image('UMD/hansen/global_forest_change_2015').clip(filtercountry); 
 var treecover2000 = gfcImage.select('treecover2000');
 var treecover2000Area = treecover2000.gt(30).multiply(ee.Image.pixelArea());
-var forest2000 = treecover2000Area.divide(100).reduceRegions({
+var forest2000 = treecover2000Area.reduceRegions({
   'collection': filtercountry,
   'reducer': ee.Reducer.sum(),
   'scale': scale
